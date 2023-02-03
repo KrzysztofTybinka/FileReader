@@ -1,0 +1,36 @@
+# Build results
+bin/
+obj/
+
+# Visual Studio folders
+*.vs/
+
+# NuGet packages
+*.nupkg
+*.nuget.deltafile
+
+# Visual Studio files
+*.csproj
+*.sln
+*.suo
+
+# Common Visual Studio files
+.DS_Store
+*.user
+*.userosscache
+*.suo
+
+# Compiled code
+*.dll
+*.exe
+
+# Tools
+*.g.i.cs
+*.g.i.vb
+
+# Documentation
+_UpgradeReport_Files/
+UpgradeLog*.XML
+
+# Logs
+*.log
