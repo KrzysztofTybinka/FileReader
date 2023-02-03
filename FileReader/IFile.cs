@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FileReader
 {
-    internal interface IFile
+    public interface IFile
     {
+
     }
 }

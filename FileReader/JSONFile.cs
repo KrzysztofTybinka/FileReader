@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,14 @@ namespace FileReader
     /// </summary>
     public class JSONFile
     {
+        private JObject file = new JObject();
+
+
+        public JSONFile()
+        {
+
+        }
+
+
     }
 }
