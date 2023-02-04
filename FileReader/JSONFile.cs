@@ -22,7 +22,33 @@ namespace FileReader
 
         }
 
-        public async Task<bool> DownloadFile(string url)
+        public List<string> GetAttributeValues(string attributeName)
+        {
+            return GetAttributeValues(file, attributeName);
+        }
+
+        private List<string> GetAttributeValues(JObject json, string attributeName)
+        {
+            var attributeValues = new List<string>();
+
+            foreach (var property in json.Properties())
+            {
+                var propertyValue = property.Value;
+
+                if (propertyValue.Type == JTokenType.Object)
+                {
+                    attributeValues.AddRange(GetAttributeValues((JObject)propertyValue, attributeName));
+                }
+                else if (property.Name == attributeName)
+                {
+                    attributeValues.Add(propertyValue.ToString());
+                }
+            }
+
+            return attributeValues;
+        }
+
+        public async Task<bool> DownloadFileAsync(string url)
         {
             try
             {
