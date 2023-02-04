@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FileReader
 {
@@ -17,38 +18,24 @@ namespace FileReader
         private JObject file = new JObject();
 
 
-        public JSONFile()
+        public JSONFile(string url)
         {
-
+            file = DownloadFileAsync(url).Result;
         }
 
-        public List<string> GetAttributeValues(string attributeName)
+        public List<object> GetAttributeValues(string propertyName)
         {
-            return GetAttributeValues(file, attributeName);
-        }
+            string[] properties = propertyName.Split('.');
+            List<object> list = new List<object>();
 
-        private List<string> GetAttributeValues(JObject json, string attributeName)
-        {
-            var attributeValues = new List<string>();
-
-            foreach (var property in json.Properties())
+            foreach (KeyValuePair<string, JToken?> prop in file)
             {
-                var propertyValue = property.Value;
 
-                if (propertyValue.Type == JTokenType.Object)
-                {
-                    attributeValues.AddRange(GetAttributeValues((JObject)propertyValue, attributeName));
-                }
-                else if (property.Name == attributeName)
-                {
-                    attributeValues.Add(propertyValue.ToString());
-                }
             }
-
-            return attributeValues;
         }
 
-        public async Task<bool> DownloadFileAsync(string url)
+
+        private async Task<JObject> DownloadFileAsync(string url)
         {
             try
             {
@@ -56,14 +43,13 @@ namespace FileReader
                 {
                     HttpClient client = new HttpClient();
                     string jsonString = await client.GetStringAsync(url);
-                    file = JObject.Parse(jsonString);
-                    return true;
+                    return JObject.Parse(jsonString);
                 }
                 throw new Exception();
             }
             catch (Exception)
             {
-                return false;
+                throw new FileLoadException("File not loaded.");
             }
         }
 

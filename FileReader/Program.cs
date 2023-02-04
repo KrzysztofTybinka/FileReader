@@ -10,15 +10,8 @@ namespace FileReader
         {
             string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.json";
 
-            HttpClient client = new HttpClient();
-
-            string jsonString = await client.GetStringAsync(url);
-
-
-            JObject jsonObj = JObject.Parse(jsonString);
-
-
-            Console.WriteLine(jsonObj);
+            JSONFile f = new JSONFile(url);
+            f.GetAttributeValues("Age");
         }
     }
 }
