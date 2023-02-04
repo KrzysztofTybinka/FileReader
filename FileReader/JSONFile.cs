@@ -22,17 +22,21 @@ namespace FileReader
 
         }
 
-        public bool CreateFromUrl(string url)
+        public bool DownloadFile(string source)
         {
             try
             {
-                if (IsValidUrl(url))
+                if (IsValidUrl(source))
                 {
                     using (var webClient = new WebClient())
                     {
-                        file = (JObject)webClient.DownloadString(url);
+                        file = (JObject)webClient.DownloadString(source);
                         return true;
                     }
+                }
+                if (IsValidPath(source))
+                {
+
                 }
                 throw new Exception();
             }
@@ -44,14 +48,28 @@ namespace FileReader
 
         private bool IsValidUrl(string url)
         {
-            FileInfo fi = new FileInfo(url);
-            return fi.Extension == ".json";
+            try
+            {
+                FileInfo fi = new FileInfo(url);
+                return fi.Extension == ".json";
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private bool IsValidPath(string path)
         {
-            FileInfo fi = new FileInfo(path);
-            return fi.Extension == ".json";
+            try
+            {
+                FileInfo fi = new FileInfo(path);
+                return fi.Extension == ".json";
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
