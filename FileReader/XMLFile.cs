@@ -21,22 +21,24 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
-        private XDocument CreateXmlFile(Dictionary<string, string> data)
+        /// <summary>
+        /// Creates xml file from given dictionary.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="rootValue"></param>
+        /// <returns>XDocument</returns>
+        public XDocument CreateXmlFile(Dictionary<string, string> data, string rootValue)
         {
             XDocument xmlFile = new XDocument();
-            XElement root = new XElement(data["root"]);
+            XElement root = new XElement(rootValue);
 
             foreach (var item in data)
             {
-                if (item.Key != "root")
-                {
-                    XElement element = new XElement(item.Key, item.Value);
-                    root.Add(element);
-                }
+                XElement element = new XElement(item.Key, item.Value);
+                root.Add(element);
             }
 
             xmlFile.Add(root);
-
             return xmlFile;
         }
 
