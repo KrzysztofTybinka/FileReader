@@ -35,6 +35,8 @@ namespace FileReader
                 throw new FileLoadException("File not loaded.");
             }
         }
+
+
         public List<object> ObjectsToList(string root)
         {
             try
@@ -54,6 +56,7 @@ namespace FileReader
                 throw new FileNotFoundException("Cannot get file.");
             }
         }
+
 
         private bool IsValidUrl(string url)
         {

@@ -26,6 +26,11 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
+        /// <summary>
+        /// Converts string representation of JSON file to list of objects.
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns>List of JSON elements.</returns>
         public List<object> ObjectsToList(string root)
         {
             List<object> list = new List<object>();
@@ -41,7 +46,12 @@ namespace FileReader
             return list;
         }       
 
-
+        /// <summary>
+        /// Downloads JSON content as JObject from given url.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>JObject wit downloaded json content.</returns>
+        /// <exception cref="FileLoadException"></exception>
         private async Task<JObject> DownloadFileAsync(string url)
         {
             try
@@ -60,6 +70,11 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Checks if file type from given url is of type JSON.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>True if file is JSON, otherwise false.</returns>
         private bool IsValidUrl(string url)
         {
             try
