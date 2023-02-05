@@ -19,11 +19,14 @@ namespace FileReader
         public List<object> ObjectsToList(string root)
         {
             List<object> list = new List<object>();
-            XElement rootElement = file.Element(root);
+            XElement? rootElement = file.Element(root);
 
-            foreach (var element in rootElement.Elements())
+            if (rootElement != null)
             {
-                list.Add(element);
+                foreach (var element in rootElement.Elements())
+                {
+                    list.Add(element);
+                }
             }
             return list;
         }

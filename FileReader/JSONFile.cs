@@ -28,10 +28,14 @@ namespace FileReader
         public List<object> ObjectsToList(string root)
         {
             List<object> list = new List<object>();
+            JToken? rootElement = file[root];
 
-            foreach (var item in file[root])
+            if(rootElement != null)
             {
-                list.Add(item);
+                foreach (var item in rootElement)
+                {
+                    list.Add(item);
+                }
             }
             return list;
         }       
