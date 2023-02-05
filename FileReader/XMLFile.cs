@@ -21,6 +21,25 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
+        private XDocument CreateXmlFile(Dictionary<string, string> data)
+        {
+            XDocument xmlFile = new XDocument();
+            XElement root = new XElement(data["root"]);
+
+            foreach (var item in data)
+            {
+                if (item.Key != "root")
+                {
+                    XElement element = new XElement(item.Key, item.Value);
+                    root.Add(element);
+                }
+            }
+
+            xmlFile.Add(root);
+
+            return xmlFile;
+        }
+
         /// <summary>
         /// Separates xml objects by given elemen
         /// and parses it to list of objects.
