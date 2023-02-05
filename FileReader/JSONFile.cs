@@ -27,7 +27,8 @@ namespace FileReader
         }
 
         /// <summary>
-        /// Converts string representation of JSON file to list of objects.
+        /// Separates json objects by given attribute
+        /// and parses it to list of objects.
         /// </summary>
         /// <param name="root"></param>
         /// <returns>List of JSON elements.</returns>
@@ -50,7 +51,7 @@ namespace FileReader
         /// Downloads JSON content as JObject from given url.
         /// </summary>
         /// <param name="url"></param>
-        /// <returns>JObject wit downloaded json content.</returns>
+        /// <returns>JObject with downloaded json content.</returns>
         /// <exception cref="FileLoadException"></exception>
         private async Task<JObject> DownloadFileAsync(string url)
         {
