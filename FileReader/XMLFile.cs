@@ -16,6 +16,18 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
+        public List<object> ObjectsToList(string root)
+        {
+            List<object> list = new List<object>();
+            XElement rootElement = file.Element(root);
+
+            foreach (var element in rootElement.Elements())
+            {
+                list.Add(element);
+            }
+            return list;
+        }
+
         private async Task<XDocument> DownloadFileAsync(string url)
         {
             try
