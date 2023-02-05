@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace FileReader
 {
-    public class XMLFile
+    public class XMLFile : IFile
     {
         private XDocument file = new XDocument();
         public XMLFile(string url)
