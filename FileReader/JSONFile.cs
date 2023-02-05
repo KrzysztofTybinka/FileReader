@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -23,16 +25,16 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
-        public List<object> GetAttributeValues(string propertyName)
+        public List<object> ObjectsToList(string root)
         {
-            string[] properties = propertyName.Split('.');
             List<object> list = new List<object>();
 
-            foreach (KeyValuePair<string, JToken?> prop in file)
+            foreach (var item in file[root])
             {
-
+                list.Add(item);
             }
-        }
+            return list;
+        }       
 
 
         private async Task<JObject> DownloadFileAsync(string url)

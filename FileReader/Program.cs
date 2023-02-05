@@ -11,7 +11,7 @@ namespace FileReader
             string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.json";
 
             JSONFile f = new JSONFile(url);
-            f.GetAttributeValues("Age");
+            f.ObjectsToList("interns");
         }
     }
 }
