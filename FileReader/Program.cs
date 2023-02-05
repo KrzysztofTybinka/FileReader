@@ -8,10 +8,11 @@ namespace FileReader
     {
         static async Task Main(string[] args)
         {
-            string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.csv";
+            string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.json";
 
-            CSVFile f = new CSVFile(url);
+            JSONFile f = new JSONFile(url);
             f.ObjectsToList("interns");
+            Console.Write(f.ToString());
         }
     }
 }

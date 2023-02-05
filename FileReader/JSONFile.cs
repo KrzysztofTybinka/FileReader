@@ -26,6 +26,11 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
+        public override string ToString()
+        {
+            return file.ToString();
+        }
+
         /// <summary>
         /// Separates json objects by given attribute
         /// and parses it to list of objects.
