@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,33 @@ namespace FileReader
 
         private async Task<XDocument> DownloadFileAsync(string url)
         {
-            HttpClient client = new HttpClient();
-            string xmlString = await client.GetStringAsync(url);
-            return XDocument.Parse(xmlString);
+            try
+            {
+                if (IsValidUrl(url))
+                {
+                    HttpClient client = new HttpClient();
+                    string xmlString = await client.GetStringAsync(url);
+                    return XDocument.Parse(xmlString);
+                }
+                throw new Exception();
+            }
+            catch (Exception)
+            {
+                throw new FileLoadException("File not loaded.");
+            }
+        }
+
+        private bool IsValidUrl(string url)
+        {
+            try
+            {
+                FileInfo fi = new FileInfo(url);
+                return fi.Extension == ".xml";
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
