@@ -8,9 +8,9 @@ namespace FileReader
     {
         static async Task Main(string[] args)
         {
-            string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.json";
+            string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.csv";
 
-            JSONFile f = new JSONFile(url);
+            CSVFile f = new CSVFile(url);
             f.ObjectsToList("interns");
             Console.Write(f.ToString());
         }

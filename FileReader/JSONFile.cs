@@ -26,11 +26,6 @@ namespace FileReader
             file = DownloadFileAsync(url).Result;
         }
 
-        public override string ToString()
-        {
-            return file.ToString();
-        }
-
         /// <summary>
         /// Separates json objects by given attribute
         /// and parses it to list of objects.
@@ -94,6 +89,13 @@ namespace FileReader
             }
         }
 
-
+        /// <summary>
+        /// Returns representation of this JSON file.
+        /// </summary>
+        /// <returns>The representation of this JSON file.</returns>
+        public override string ToString()
+        {
+            return file.ToString();
+        }
     }
 }

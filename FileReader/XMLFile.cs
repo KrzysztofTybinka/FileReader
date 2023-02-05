@@ -83,5 +83,14 @@ namespace FileReader
                 return false;
             }
         }
+
+        /// <summary>
+        /// Returns representation of this XML file.
+        /// </summary>
+        /// <returns>The representation of this XML file.</returns>
+        public override string ToString()
+        {
+            return file.ToString();
+        }
     }
 }
