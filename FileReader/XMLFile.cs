@@ -10,9 +10,10 @@ namespace FileReader
 {
     public class XMLFile : IFile
     {
-        private XDocument file = new XDocument();
+        private XDocument file;
         public XMLFile(string url)
         {
+            file = new XDocument();
             file = DownloadFileAsync(url).Result;
         }
 

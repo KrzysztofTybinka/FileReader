@@ -17,11 +17,12 @@ namespace FileReader
     /// </summary>
     public class JSONFile : IFile
     {
-        private JObject file = new JObject();
+        private JObject file;
 
 
         public JSONFile(string url)
         {
+            file = new JObject();
             file = DownloadFileAsync(url).Result;
         }
 
