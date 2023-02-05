@@ -8,6 +8,6 @@ namespace FileReader
 {
     public interface IFile
     {
-
+        public List<object> ObjectsToList(string root);
     }
 }

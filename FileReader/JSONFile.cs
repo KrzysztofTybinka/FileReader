@@ -15,7 +15,7 @@ namespace FileReader
     /// Initilizes a new instance of the JSONFile class.
     /// Represents a JSON file.
     /// </summary>
-    public class JSONFile
+    public class JSONFile : IFile
     {
         private JObject file = new JObject();
 
