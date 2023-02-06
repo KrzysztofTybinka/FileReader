@@ -9,12 +9,12 @@ namespace FileReader
         static async Task Main(string[] args)
         {
             Dialogues.Start();
-            Dialogues.Menu();
 
-            //string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.csv";
-            //CSVFile f = new CSVFile(url);
-            //f.ObjectsToList("interns");
-            //Console.Write(f.ToString());
+            while (true)
+            {
+                Dialogues.Menu();
+            }
+
         }
     }
 }

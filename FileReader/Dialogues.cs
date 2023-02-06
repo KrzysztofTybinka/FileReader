@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -64,6 +65,19 @@ namespace FileReader
 
         private static void DownloadFile()
         {
+            try
+            {
+                Console.WriteLine("You chose to download a file");
+                Console.Write("Enter url: ");
+                string url = Console.ReadLine() ?? throw new ArgumentNullException();
+                Console.Write("Enter file name: ");
+                string name = Console.ReadLine() ?? throw new ArgumentNullException();
+                string type = GetFileType(url);
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Invalid operation.");
+            }
 
         }
 
@@ -80,6 +94,19 @@ namespace FileReader
         private static void ShowFiles()
         {
 
+        }
+
+        private static string GetFileType(string url)
+        {
+            try
+            {
+                FileInfo fi = new FileInfo(url);
+                return fi.Extension;
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Invalid command.");
+            }
         }
     }
 }
