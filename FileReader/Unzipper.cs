@@ -14,6 +14,12 @@ namespace FileReader
     /// </summary>
     public class Unzipper
     {
+        private readonly byte[] file;
+
+        public Unzipper(string url)
+        {
+            file = GetFile(url);
+        }
 
 
         /// <summary>
@@ -24,11 +30,9 @@ namespace FileReader
         /// <exception cref="FileLoadException"></exception>
         public string UnzipTypeOut(out string type)
         {
-            var byteArr = GetFile();
-
             try
             {
-                using (var zippedStream = new MemoryStream(byteArr))
+                using (var zippedStream = new MemoryStream(file))
                 {
                     using (var archive = new ZipArchive(zippedStream))
                     {
@@ -65,7 +69,7 @@ namespace FileReader
         /// </summary>
         /// <returns>Byte representation of current .zip file.</returns>
         /// <exception cref="FileNotFoundException"></exception>
-        private byte[] GetFile()
+        private byte[] GetFile(string url)
         {
             try
             {

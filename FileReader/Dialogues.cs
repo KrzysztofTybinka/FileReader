@@ -108,5 +108,23 @@ namespace FileReader
                 throw new InvalidOperationException("Invalid command.");
             }
         }
+
+        private static IFile GetFile(string type, string url)
+        {
+            switch (type)
+            {
+                case ".json":
+                    return new JSONFile(url);
+
+                case ".xml":
+                    return new XMLFile(url);
+
+                case ".csv":
+                    return new CSVFile(url);
+
+                default:
+                    throw new InvalidOperationException("File does not exist");
+            }
+        }
     }
 }
