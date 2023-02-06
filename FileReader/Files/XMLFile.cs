@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace FileReader
+namespace FileReader.Files
 {
     /// <summary>
     /// Initilizes a new instance of the XMLFile class.

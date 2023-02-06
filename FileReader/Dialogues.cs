@@ -80,8 +80,7 @@ namespace FileReader
                 Console.WriteLine("You chose to download a file");
                 Console.Write("Enter url: ");
                 string url = Console.ReadLine() ?? throw new ArgumentNullException();
-                Console.Write("Enter file name: ");
-                string name = Console.ReadLine() ?? throw new ArgumentNullException();
+                string name;
                 string type = GetFileType(url);
                 string content;
 
@@ -95,6 +94,12 @@ namespace FileReader
                     content = DownloadFileAsync(url).Result;
                 }
 
+                do
+                {
+                    Console.Write("Enter file name: ");
+                    name = Console.ReadLine() ?? throw new ArgumentNullException();
+                } while (FileExists(name + type));
+
                 IFile file = GetFile(type, content);
 
                 using (var context = new FileContext())
@@ -104,7 +109,7 @@ namespace FileReader
                     context.Files.Add(f);
                     context.SaveChanges();
                 }
-                Console.WriteLine("File saved successfully.");
+                Console.WriteLine("File saved successfully.\n");
                 Menu();
             }
             catch (Exception)
@@ -117,7 +122,17 @@ namespace FileReader
 
         private static void OpenFile()
         {
+            Console.WriteLine("You chose to open a file.");
+            Console.Write("Enter file name: ");
+            string name = Console.ReadLine() ?? throw new ArgumentNullException();
 
+            if (FileExists(name))
+            {
+                using (var context = new FileContext())
+                {
+
+                }
+            }
         }
 
         private static void CreateFile()
@@ -128,6 +143,20 @@ namespace FileReader
         private static void ShowFiles()
         {
 
+        }
+
+        private static bool FileExists(string name)
+        {
+            using (var context = new FileContext())
+            {
+                bool exists = context.Files.Any(f => f.Name == name);
+                if (exists)
+                {
+                    Console.WriteLine("File with this name already exists.");
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static string GetFileType(string url)

@@ -9,20 +9,28 @@ using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace FileReader
+namespace FileReader.Files
 {
     /// <summary>
     /// Initilizes a new instance of the JSONFile class.
     /// Represents a JSON file.
     /// </summary>
-    public class JSONFile : IFile
+    public class JSONFile : FileAbstract
     {
-        private JObject file;
 
-        public JSONFile(string content)
+        public JSONFile()
         {
-            file = new JObject();
-            file = JObject.Parse(content);
+
+        }
+
+        public override void Deserialize(string content)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string Serialize()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -36,7 +44,7 @@ namespace FileReader
             List<object> list = new List<object>();
             JToken? rootElement = file[root];
 
-            if(rootElement != null)
+            if (rootElement != null)
             {
                 foreach (var item in rootElement)
                 {
@@ -44,7 +52,8 @@ namespace FileReader
                 }
             }
             return list;
-        }       
+        }
+
 
 
         /// <summary>

@@ -14,11 +14,11 @@ namespace FileReader
     /// </summary>
     public class Unzipper
     {
-        private readonly byte[] file;
+        private readonly byte[] content;
 
         public Unzipper(string url)
         {
-            file = GetFile(url);
+            content = GetFile(url);
         }
 
 
@@ -32,7 +32,7 @@ namespace FileReader
         {
             try
             {
-                using (var zippedStream = new MemoryStream(file))
+                using (var zippedStream = new MemoryStream(content))
                 {
                     using (var archive = new ZipArchive(zippedStream))
                     {
