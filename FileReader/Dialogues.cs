@@ -34,12 +34,17 @@ namespace FileReader
                 "\n3. Create file\n4. Show files\nEnter a number...");
 
             int option;
-            while (!int.TryParse(Console.ReadLine(), out option))
+            while ((!int.TryParse(Console.ReadLine(), out option)) && (option >= 1 & option <=4))
             {
                 Console.WriteLine("Option not supported. Try again...");
             }
 
             Console.WriteLine(option);
+        }
+
+        private static void DownloadFile()
+        {
+
         }
     }
 }
