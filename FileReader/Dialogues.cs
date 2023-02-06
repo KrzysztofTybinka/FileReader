@@ -32,13 +32,17 @@ namespace FileReader
         /// </summary>
         public static void Menu()
         {
-            Console.WriteLine("Choose one option:\n1. Download file\n2. Open file" +
+            Console.WriteLine("Choose one option:\n0. Exit\n1. Download file\n2. Open file" +
                 "\n3. Create file\n4. Show files\nEnter a number...");
 
             while (true)
             {
                 switch (Console.ReadLine())
                 {
+                    case "0":
+                        Environment.Exit(0);
+                        break;
+
                     case "1":
                         DownloadFile();
                         break;
@@ -83,6 +87,7 @@ namespace FileReader
                     context.SaveChanges();
                 }
                 Console.WriteLine("File saved successfully.");
+                Menu();
             }
             catch (Exception)
             {
