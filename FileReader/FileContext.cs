@@ -14,6 +14,10 @@ namespace FileReader
     {
         public DbSet<File> Files { get; set; }
 
+        /// <summary>
+        /// Provides connection string, builds database.
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=KRZYSZTOF;Initial Catalog=Files;Trusted_Connection=True;TrustServerCertificate=True");
