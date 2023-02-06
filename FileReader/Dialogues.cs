@@ -59,6 +59,12 @@ namespace FileReader
                         ShowFiles();
                         break;
 
+                    case "5":
+                        break;
+
+                    case "6":
+                        break;
+
                     default:
                         Console.WriteLine("Option not supported. Try again...");
                         continue;
@@ -77,7 +83,19 @@ namespace FileReader
                 Console.Write("Enter file name: ");
                 string name = Console.ReadLine() ?? throw new ArgumentNullException();
                 string type = GetFileType(url);
-                IFile file = GetFile(type, url);
+                string content;
+
+                if(type == ".zip")
+                {
+                    Unzipper unzip = new Unzipper(url);
+                    content = unzip.UnzipTypeOut(out type);
+                }
+                else
+                {
+                    content = DownloadFileAsync(url).Result;
+                }
+
+                IFile file = GetFile(type, content);
 
                 using (var context = new FileContext())
                 {
@@ -125,21 +143,35 @@ namespace FileReader
             }
         }
 
-        private static IFile GetFile(string type, string url)
+        private static IFile GetFile(string type, string content)
         {
             switch (type)
             {
                 case ".json":
-                    return new JSONFile(url);
+                    return new JSONFile(content);
 
                 case ".xml":
-                    return new XMLFile(url);
+                    return new XMLFile(content);
 
                 case ".csv":
-                    return new CSVFile(url);
+                    return new CSVFile(content);
 
                 default:
                     throw new InvalidOperationException("File does not exist");
+            }
+        }
+
+        private static async Task<string> DownloadFileAsync(string url)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                string content = await client.GetStringAsync(url);
+                return content;
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Invalid operation.");
             }
         }
     }

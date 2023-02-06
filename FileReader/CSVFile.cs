@@ -16,9 +16,9 @@ namespace FileReader
     {
         private string file;
 
-        public CSVFile(string url)
+        public CSVFile(string content)
         {
-            file = DownloadFileAsync(url).Result;
+            file = content;
         }
 
         /// <summary>
@@ -47,47 +47,6 @@ namespace FileReader
             }
         }
 
-        /// <summary>
-        /// Downloads CSV content as string from given url.
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns>String with downloaded csv content.</returns>
-        /// <exception cref="FileLoadException"></exception>
-        private async Task<string> DownloadFileAsync(string url)
-        {
-            try
-            {
-                if (IsValidUrl(url))
-                {
-                    HttpClient client = new HttpClient();
-                    string csvString = await client.GetStringAsync(url);
-                    return csvString;
-                }
-                throw new Exception();
-            }
-            catch (Exception)
-            {
-                throw new FileLoadException("File not loaded.");
-            }
-        }
-
-        /// <summary>
-        /// Checks if file type from given url is of type CSV.
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns>True if file is CSV type, otherwise false.</returns>
-        private bool IsValidUrl(string url)
-        {
-            try
-            {
-                FileInfo fi = new FileInfo(url);
-                return fi.Extension == ".csv";
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
 
         /// <summary>
         /// Returns representation of this XML file.

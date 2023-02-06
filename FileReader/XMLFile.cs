@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,10 @@ namespace FileReader
     {
         private XDocument file;
 
-        public XMLFile(string url)
+        public XMLFile(string content)
         {
             file = new XDocument();
-            file = DownloadFileAsync(url).Result;
+            file = XDocument.Parse(content);
         }
 
         /// <summary>
@@ -64,47 +65,6 @@ namespace FileReader
             return list;
         }
 
-        /// <summary>
-        /// Downloads XML content as XDocument from given url.
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns>XDocument with downloaded json content.</returns>
-        /// <exception cref="FileLoadException"></exception>
-        private async Task<XDocument> DownloadFileAsync(string url)
-        {
-            try
-            {
-                if (IsValidUrl(url))
-                {
-                    HttpClient client = new HttpClient();
-                    string xmlString = await client.GetStringAsync(url);
-                    return XDocument.Parse(xmlString);
-                }
-                throw new Exception();
-            }
-            catch (Exception)
-            {
-                throw new FileLoadException("File not loaded.");
-            }
-        }
-
-        /// <summary>
-        /// Checks if file type from given url is of type XML.
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns>True if file is XML, otherwise false.</returns>
-        private bool IsValidUrl(string url)
-        {
-            try
-            {
-                FileInfo fi = new FileInfo(url);
-                return fi.Extension == ".xml";
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
 
         /// <summary>
         /// Returns representation of this XML file.
