@@ -8,9 +8,10 @@ namespace FileReader
     {
         static async Task Main(string[] args)
         {
-            string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.csv";
             Dialogues.Start();
+            Dialogues.Menu();
 
+            //string url = "https://fortedigital.github.io/Back-End-Internship-Task/interns.csv";
             //CSVFile f = new CSVFile(url);
             //f.ObjectsToList("interns");
             //Console.Write(f.ToString());
