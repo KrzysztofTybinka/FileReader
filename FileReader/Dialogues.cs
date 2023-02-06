@@ -17,11 +17,11 @@ namespace FileReader
         /// </summary>
         public static void Start()
         {
-            Console.WriteLine("File Reader is a command-line interface application that provides \n " +
-                "methods to create files in different formats, download files from given url, " +
-                "unzip, deserialize and/or read them. \n");
-            Console.WriteLine();
-            Console.WriteLine("Accessible file types: XML, JSON, CSV. (aslo in ZIP format)");
+            Console.WriteLine("File Reader is a command-line interface application that provides \n" +
+                "methods to create files in different formats, download files from \n" +
+                "given url, unzip, deserialize and/or read them. \n");
+            Console.WriteLine("Accessible file types: XML, JSON, CSV, (aslo in ZIP format).");
+            Console.WriteLine("─────────────────────────────────────────────────────────────────");
         }
     }
 }
