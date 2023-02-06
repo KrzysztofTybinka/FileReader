@@ -73,10 +73,21 @@ namespace FileReader
                 Console.Write("Enter file name: ");
                 string name = Console.ReadLine() ?? throw new ArgumentNullException();
                 string type = GetFileType(url);
+                IFile file = GetFile(type, url);
+
+                using (var context = new FileContext())
+                {
+                    var f = new File(name + type, file.ToString()!);
+
+                    context.Files.Add(f);
+                    context.SaveChanges();
+                }
+                Console.WriteLine("File saved successfully.");
             }
             catch (Exception)
             {
-                throw new InvalidOperationException("Invalid operation.");
+                Console.WriteLine("Couldn't download the file. Please try again...");
+                Menu();
             }
 
         }

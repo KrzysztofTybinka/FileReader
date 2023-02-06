@@ -9,6 +9,6 @@ namespace FileReader
     public interface IFile
     {
         public List<object> ObjectsToList(string root);
-        public void Parse(string content);
+        //public void Parse(string content);
     }
 }

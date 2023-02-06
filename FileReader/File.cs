@@ -11,6 +11,12 @@ namespace FileReader
     /// </summary>
     public class File
     {
+        public File(string name, string content)
+        {
+            Name = name;
+            Content = content;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Content { get; set; }
