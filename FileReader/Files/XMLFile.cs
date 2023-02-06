@@ -13,14 +13,12 @@ namespace FileReader.Files
     /// Initilizes a new instance of the XMLFile class.
     /// Represents a XML file.
     /// </summary>
-    public class XMLFile : IFile
+    public class XMLFile : FileAbstract
     {
-        private XDocument file;
 
-        public XMLFile(string content)
+        public XMLFile()
         {
-            file = new XDocument();
-            file = XDocument.Parse(content);
+
         }
 
         /// <summary>
@@ -44,6 +42,11 @@ namespace FileReader.Files
             return xmlFile;
         }
 
+        public override void Deserialize(string content)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Separates xml objects by given elemen
         /// and parses it to list of objects.
@@ -63,6 +66,11 @@ namespace FileReader.Files
                 }
             }
             return list;
+        }
+
+        public override string Serialize()
+        {
+            throw new NotImplementedException();
         }
 
 

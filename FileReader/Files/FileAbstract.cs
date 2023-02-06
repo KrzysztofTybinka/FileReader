@@ -10,6 +10,7 @@ namespace FileReader.Files
     {
         public string FileName { get; set; }
         public string Content { get; set; }
+        public string Type { get; set; }
 
         public abstract string Serialize();
         public abstract void Deserialize(string content);

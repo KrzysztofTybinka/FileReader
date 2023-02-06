@@ -12,13 +12,17 @@ namespace FileReader.Files
     /// Initilizes a new instance of the CSVFile class.
     /// Represents a CSV file.
     /// </summary>
-    public class CSVFile : IFile
+    public class CSVFile : FileAbstract
     {
-        private string file;
 
-        public CSVFile(string content)
+        public CSVFile()
         {
-            file = content;
+
+        }
+
+        public override void Deserialize(string content)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -45,6 +49,11 @@ namespace FileReader.Files
             {
                 throw new FileNotFoundException("Cannot get file.");
             }
+        }
+
+        public override string Serialize()
+        {
+            throw new NotImplementedException();
         }
 
 

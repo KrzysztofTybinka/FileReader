@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileReader
 {
-    internal class FileRepository
+    public class FileRepository
     {
     }
 }

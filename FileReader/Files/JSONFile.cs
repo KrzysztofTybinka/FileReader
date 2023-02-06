@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,14 @@ namespace FileReader.Files
 
         public override void Deserialize(string content)
         {
-            throw new NotImplementedException();
+            JSONFile file = JsonConvert.DeserializeObject<JSONFile>(content) ?? throw new ArgumentNullException(nameof(content));
+            FileName = file.FileName;
+            Content = file.Content;
         }
 
         public override string Serialize()
         {
-            throw new NotImplementedException();
+            return JsonConvert.SerializeObject(this);
         }
 
         /// <summary>
@@ -62,7 +65,7 @@ namespace FileReader.Files
         /// <returns>The representation of this JSON file.</returns>
         public override string ToString()
         {
-            return file.ToString();
+            return Content;
         }
     }
 }
