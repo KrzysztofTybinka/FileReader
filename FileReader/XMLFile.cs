@@ -15,6 +15,7 @@ namespace FileReader
     public class XMLFile : IFile
     {
         private XDocument file;
+
         public XMLFile(string url)
         {
             file = new XDocument();

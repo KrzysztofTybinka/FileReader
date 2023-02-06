@@ -19,7 +19,6 @@ namespace FileReader
     {
         private JObject file;
 
-
         public JSONFile(string url)
         {
             file = new JObject();
