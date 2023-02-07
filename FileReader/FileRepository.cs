@@ -8,8 +8,16 @@ using File = FileReader.Files.File;
 
 namespace FileReader
 {
+    /// <summary>
+    /// Provides methods to manage database.
+    /// </summary>
     public class FileRepository
     {
+        /// <summary>
+        /// Saves given file into a database.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns>True if file was saved sccessfully, otherwise false.</returns>
         public bool SaveFile(File file)
         {
             try
@@ -29,6 +37,11 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Gets file from a database, based on given file name.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns>Proper file.</returns>
         public File GetFile(string fileName)
         {
             using (var context = new FileContext())
@@ -40,6 +53,11 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Deletes file from a database based on file name.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns>True if file was deleted, otherwise false.</returns>
         public bool DeleteFile(string fileName)
         {
             try
@@ -58,6 +76,10 @@ namespace FileReader
             }
         }    
         
+        /// <summary>
+        /// Gets list of all file names.
+        /// </summary>
+        /// <returns>List of file names.</returns>
         public List<string> GetFilesList()
         {
             using (var context = new FileContext())
@@ -68,6 +90,11 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Checks if file with given file name exists.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>True if file exists, otherwise false.</returns>
         public bool FileExists(string name)
         {
             using (var context = new FileContext())
