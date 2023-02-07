@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,41 +77,36 @@ namespace FileReader
 
         private static void DownloadFile()
         {
-            try
+            Console.WriteLine("\nYou chose to download a file.\nEnter url: ");
+            string url = Console.ReadLine() ?? throw new ArgumentNullException();
+            Console.WriteLine("Enter file name: ");
+            string fileName = Console.ReadLine() ?? throw new ArgumentNullException();
+            var fr = new FileRepository();
+
+            while (fr.FileExists(fileName))
             {
-                Console.WriteLine("You chose to download a file");
-                Console.Write("Enter url: ");
-                string url = Console.ReadLine() ?? throw new ArgumentNullException();
-                string name;
-                string type = GetFileType(url);
-                string content;
-
-
-
- 
-                Menu();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Couldn't download the file. Please try again...");
-                Menu();
+                Console.WriteLine("File with this name already exists...\nGo back to menu (0), or enter new name: ");
+                fileName = Console.ReadLine() ?? throw new ArgumentNullException();
+                if (fileName == "0")
+                {
+                    Menu();
+                }
             }
 
+            FileManager f = new FileManager(new FileProcessor(), fr);
+
+            if (!f.DownloadFile(url, fileName).Result)
+            {
+                Console.WriteLine("Failed to download a file.\n");
+                Menu();
+            }
+            Console.WriteLine("File downloaded successfully.\n");
+            Menu();
         }
 
         private static void OpenFile()
         {
-            Console.WriteLine("You chose to open a file.");
-            Console.Write("Enter file name: ");
-            string name = Console.ReadLine() ?? throw new ArgumentNullException();
 
-            if (FileExists(name))
-            {
-                using (var context = new FileContext())
-                {
-
-                }
-            }
         }
 
         private static void CreateFile()
@@ -123,35 +119,9 @@ namespace FileReader
 
         }
 
-        private static bool FileExists(string name)
+        private static void FileExists()
         {
-            using (var context = new FileContext())
-            {
-                bool exists = context.Files.Any(f => f.Name == name);
-                if (exists)
-                {
-                    Console.WriteLine("File with this name already exists.");
-                    return true;
-                }
-            }
-            return false;
+
         }
-
-        private static string GetFileType(string url)
-        {
-            try
-            {
-                FileInfo fi = new FileInfo(url);
-                return fi.Extension;
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException("Invalid command.");
-            }
-        }
-
-
-
-
     }
 }

@@ -34,7 +34,7 @@ namespace FileReader
 
 
 
-        private static async Task<string> DownloadFileAsync(string url)
+        private async Task<string> DownloadFileAsync(string url)
         {
             try
             {
