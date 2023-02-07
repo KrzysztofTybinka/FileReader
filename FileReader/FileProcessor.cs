@@ -10,6 +10,31 @@ namespace FileReader
 {
     public class FileProcessor
     {
+        public File CreateFile(string name, string type, Dictionary<string, string> content)
+        {
+            File? file = null;
+
+            switch (type)
+            {
+                case ".json":
+                    file = new JSONFile();
+                    break;
+
+                case ".xml":
+                    file = new XMLFile();
+                    break;
+
+                case ".csv":
+                    file = new CSVFile();
+                    break;
+
+                default:
+                    throw new InvalidOperationException("Invalid file type");
+            }
+            file.CreateFile(name, content);
+            return file;
+        }
+
 
         public File DeserializeFile(string content, string name, string type)
         {

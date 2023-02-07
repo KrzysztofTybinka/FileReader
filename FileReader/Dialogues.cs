@@ -51,7 +51,7 @@ namespace FileReader
                         DownloadFile();
                         break;
 
-                        case "2":
+                    case "2":
                         OpenFile();
                         break;
 
@@ -146,7 +146,67 @@ namespace FileReader
 
         private static void CreateFile()
         {
+            Console.Write("\nYou chose to create a file.\nEnter file name: ");
+            string? fileName = Console.ReadLine();
+            var fr = new FileRepository();
+            var fp = new FileProcessor();
+            Dictionary<string, string> data = new Dictionary<string, string>();
 
+            while (fileName == null)
+            {
+                Console.Write("File name can't be empty, go back to menu (0) or enter file name: ");
+                fileName = Console.ReadLine();
+
+                if (fileName == "0")
+                {
+                    Menu();
+                }
+            }
+
+            Console.Write("Enter file type: ");
+            string? fileType = Console.ReadLine();
+
+            while (fileType == null)
+            {
+                Console.Write("File type can't be empty, go back to menu (0) or enter file type: ");
+                fileType = Console.ReadLine();
+
+                if (fileName == "0")
+                {
+                    Menu();
+                }
+            }
+
+            Console.WriteLine("You are in a creation mode.\nIf you want to create file, press enter without entering any value.");
+            while (true)
+            {
+                Console.Write("Enter key name: ");
+                string? key = Console.ReadLine();
+
+                if (String.IsNullOrEmpty(key))
+                    break;
+
+                Console.Write("Enter value: ");
+                string? value = Console.ReadLine();
+
+                if (String.IsNullOrEmpty(value))
+                    break;
+
+                data.TryAdd(key, value);
+            }
+
+            try
+            {
+                File file = fp.CreateFile(fileName, fileType, data);
+                fr.SaveFile(file);
+                Console.WriteLine("File created and saved.\n");
+                Menu();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Something went wrong.");
+                Menu();
+            }
         }
 
         private static void ShowFiles()

@@ -28,10 +28,10 @@ namespace FileReader.Files
         /// <param name="data"></param>
         /// <param name="rootValue"></param>
         /// <returns>XDocument</returns>
-        public XDocument CreateXmlFile(Dictionary<string, string> data, string rootValue)
+        public override File CreateFile(string name, Dictionary<string, string> data)
         {
             XDocument xmlFile = new XDocument();
-            XElement root = new XElement(rootValue);
+            XElement root = new XElement("Root");
 
             foreach (var item in data)
             {
@@ -40,7 +40,9 @@ namespace FileReader.Files
             }
 
             xmlFile.Add(root);
-            return xmlFile;
+            FileName = name;
+            Content = xmlFile.ToString();
+            return this;
         }
 
         public override void Deserialize(string name, string content)
