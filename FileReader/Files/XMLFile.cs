@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace FileReader.Files
 {
@@ -18,7 +19,7 @@ namespace FileReader.Files
 
         public XMLFile()
         {
-
+            Type = ".xml";
         }
 
         /// <summary>
@@ -44,7 +45,27 @@ namespace FileReader.Files
 
         public override void Deserialize(string name, string content)
         {
-            throw new NotImplementedException();
+            FileName = name;
+            Content = content;
+        }
+
+        public override string Serialize()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(XElement));
+            XElement xml;
+
+            using (var stringReader = new StringReader(Content!))
+            {
+                xml = (XElement)serializer.Deserialize(stringReader)!;
+            }
+
+            var stringBuilder = new StringBuilder();
+            using (var stringWriter = new StringWriter(stringBuilder))
+            {
+                serializer.Serialize(stringWriter, xml);
+            }
+
+            return stringBuilder.ToString();
         }
 
         /// <summary>
@@ -67,11 +88,6 @@ namespace FileReader.Files
         //    }
         //    return list;
         //}
-
-        public override string Serialize()
-        {
-            throw new NotImplementedException();
-        }
 
 
         /// <summary>

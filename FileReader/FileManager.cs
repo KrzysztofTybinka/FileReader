@@ -19,8 +19,19 @@ namespace FileReader
 
         public async Task<bool> DownloadFile(string url, string fileName)
         {
-            string content = await DownloadFileAsync(url);
             string fileType = GetFileType(url);
+            string content;
+
+            if (fileType == ".zip")
+            {
+                Unzipper uz = new Unzipper(url);
+                content = uz.UnzipTypeOut(out fileType);                
+            }
+            else
+            {
+                content = await DownloadFileAsync(url);
+            }
+
             var file = fileProcessor.DeserializeFile(content, fileName, fileType);
 
             if (!fileRepository.FileExists(fileName))

@@ -17,10 +17,16 @@ namespace FileReader.Files
 
         public CSVFile()
         {
-
+            Type = ".csv";
         }
 
         public override void Deserialize(string name, string content)
+        {
+            FileName = name;
+            Content = content;
+        }
+
+        public override string Serialize()
         {
             throw new NotImplementedException();
         }
@@ -51,10 +57,6 @@ namespace FileReader.Files
         //    }
         //}
 
-        public override string Serialize()
-        {
-            throw new NotImplementedException();
-        }
 
 
         /// <summary>
