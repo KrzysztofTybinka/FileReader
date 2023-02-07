@@ -150,7 +150,7 @@ namespace FileReader
             string? fileName = Console.ReadLine();
             var fr = new FileRepository();
             var fp = new FileProcessor();
-            Dictionary<string, string> data = new Dictionary<string, string>();
+            Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
 
             while (fileName == null)
             {
@@ -192,7 +192,10 @@ namespace FileReader
                 if (String.IsNullOrEmpty(value))
                     break;
 
-                data.TryAdd(key, value);
+                if (data.TryAdd(key, new List<string>() { value }))
+                {
+                    data[key].Add(value);
+                }
             }
 
             try

@@ -4,9 +4,9 @@ using System.Net;
 
 namespace FileReader
 {
-    internal class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             Dialogues.Start();
 

@@ -31,16 +31,18 @@ namespace FileReader.Files
             return Content;
         }
 
-        public override File CreateFile(string name, Dictionary<string, string> data)
+        public override File CreateFile(string name, Dictionary<string, List<string>> data)
         {
-            StringBuilder csvFile = new StringBuilder();
-            string header = string.Join(",", data.Keys);
-            csvFile.AppendLine(header);
-            string values = string.Join(",", data.Values);
-            csvFile.AppendLine(values);
             FileName = name;
-            Content = csvFile.ToString();
-
+            StringBuilder sb = new StringBuilder();
+            foreach (var item in data)
+            {
+                sb.Append(item.Key);
+                sb.Append(",");
+                sb.Append(string.Join(",", item.Value));
+                sb.AppendLine();
+            }
+            Content = sb.ToString();
             return this;
         }
 

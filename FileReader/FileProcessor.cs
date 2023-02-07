@@ -10,7 +10,7 @@ namespace FileReader
 {
     public class FileProcessor
     {
-        public File CreateFile(string name, string type, Dictionary<string, string> content)
+        public File CreateFile(string name, string type, Dictionary<string, List<string>> content)
         {
             File? file = null;
 

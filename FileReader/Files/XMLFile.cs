@@ -28,8 +28,9 @@ namespace FileReader.Files
         /// <param name="data"></param>
         /// <param name="rootValue"></param>
         /// <returns>XDocument</returns>
-        public override File CreateFile(string name, Dictionary<string, string> data)
+        public override File CreateFile(string name, Dictionary<string, List<string>> data)
         {
+            FileName = name;
             XDocument xmlFile = new XDocument();
             XElement root = new XElement("Root");
 
@@ -40,7 +41,6 @@ namespace FileReader.Files
             }
 
             xmlFile.Add(root);
-            FileName = name;
             Content = xmlFile.ToString();
             return this;
         }
@@ -70,26 +70,6 @@ namespace FileReader.Files
             return stringBuilder.ToString();
         }
 
-        /// <summary>
-        /// Separates xml objects by given elemen
-        /// and parses it to list of objects.
-        /// </summary>
-        /// <param name="root"></param>
-        /// <returns>List of XML elements.</returns>
-        //public List<object> ObjectsToList(string root)
-        //{
-        //    List<object> list = new List<object>();
-        //    XElement? rootElement = file.Element(root);
-
-        //    if (rootElement != null)
-        //    {
-        //        foreach (var element in rootElement.Elements())
-        //        {
-        //            list.Add(element);
-        //        }
-        //    }
-        //    return list;
-        //}
 
 
         /// <summary>

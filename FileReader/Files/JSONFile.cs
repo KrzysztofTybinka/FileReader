@@ -36,34 +36,12 @@ namespace FileReader.Files
             return JsonConvert.SerializeObject(json, Formatting.Indented);
         }
 
-        public override File CreateFile(string name, Dictionary<string, string> data)
+        public override File CreateFile(string name, Dictionary<string, List<string>> data)
         {
             FileName = name;
             Content =  JsonConvert.SerializeObject(data, Formatting.Indented);
             return this;
         }
-
-        /// <summary>
-        /// Separates json objects by given attribute
-        /// and parses it to list of objects.
-        /// </summary>
-        /// <param name="root"></param>
-        /// <returns>List of JSON elements.</returns>
-        //public List<object> ObjectsToList(string root)
-        //{
-        //    List<object> list = new List<object>();
-        //    JToken? rootElement = file[root];
-
-        //    if (rootElement != null)
-        //    {
-        //        foreach (var item in rootElement)
-        //        {
-        //            list.Add(item);
-        //        }
-        //    }
-        //    return list;
-        //}
-
 
 
         /// <summary>
