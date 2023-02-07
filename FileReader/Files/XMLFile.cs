@@ -45,12 +45,21 @@ namespace FileReader.Files
             return this;
         }
 
+        /// <summary>
+        /// Deserializes string to this object.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
         public override void Deserialize(string name, string content)
         {
             FileName = name;
             Content = content;
         }
 
+        /// <summary>
+        /// Serializes this object to a string.
+        /// </summary>
+        /// <returns>String representation of serialized object.</returns>
         public override string Serialize()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(XElement));
