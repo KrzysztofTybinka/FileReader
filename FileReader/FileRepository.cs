@@ -35,7 +35,7 @@ namespace FileReader
             {
                 var file = context.Files.SingleOrDefault(x => x.Name == fileName);
                 FileProcessor processor = new FileProcessor();
-                File f = processor.DeserializeFile(file.Content, file.Type);
+                File f = processor.DeserializeFile(file.Content, file.Name, file.Type);
                 return f;
             }
         }

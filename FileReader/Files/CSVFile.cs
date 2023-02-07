@@ -20,7 +20,7 @@ namespace FileReader.Files
 
         }
 
-        public override void Deserialize(string content)
+        public override void Deserialize(string name, string content)
         {
             throw new NotImplementedException();
         }

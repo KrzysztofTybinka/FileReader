@@ -21,13 +21,11 @@ namespace FileReader
         {
             string content = await DownloadFileAsync(url);
             string fileType = GetFileType(url);
-            var file = fileProcessor.DeserializeFile(content, fileType);
-            file.FileName = fileName;
+            var file = fileProcessor.DeserializeFile(content, fileName, fileType);
 
             if (!fileRepository.FileExists(fileName))
             {
-                fileRepository.SaveFile(file);
-                return true;
+                return fileRepository.SaveFile(file);
             }
             return false;
         }

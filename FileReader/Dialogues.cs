@@ -34,8 +34,8 @@ namespace FileReader
         /// </summary>
         public static void Menu()
         {
-            Console.WriteLine("Choose one option:\n0. Exit\n1. Download file\n2. Open file" +
-                "\n3. Create file\n4. Show files\nEnter a number...");
+            Console.Write("Choose one option:\n0. Exit\n1. Download file\n2. Open file" +
+                "\n3. Create file\n4. Show files\nEnter a number: ");
 
             while (true)
             {
@@ -77,15 +77,15 @@ namespace FileReader
 
         private static void DownloadFile()
         {
-            Console.WriteLine("\nYou chose to download a file.\nEnter url: ");
+            Console.Write("\nYou chose to download a file.\nEnter url: ");
             string url = Console.ReadLine() ?? throw new ArgumentNullException();
-            Console.WriteLine("Enter file name: ");
+            Console.Write("Enter file name: ");
             string fileName = Console.ReadLine() ?? throw new ArgumentNullException();
             var fr = new FileRepository();
 
             while (fr.FileExists(fileName))
             {
-                Console.WriteLine("File with this name already exists...\nGo back to menu (0), or enter new name: ");
+                Console.Write("File with this name already exists...\nGo back to menu (0), or enter new name: ");
                 fileName = Console.ReadLine() ?? throw new ArgumentNullException();
                 if (fileName == "0")
                 {

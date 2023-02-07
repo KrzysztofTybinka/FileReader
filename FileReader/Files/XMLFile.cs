@@ -42,7 +42,7 @@ namespace FileReader.Files
             return xmlFile;
         }
 
-        public override void Deserialize(string content)
+        public override void Deserialize(string name, string content)
         {
             throw new NotImplementedException();
         }

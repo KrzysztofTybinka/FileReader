@@ -13,6 +13,6 @@ namespace FileReader.Files
         public string Type { get; set; }
 
         public abstract string Serialize();
-        public abstract void Deserialize(string content);
+        public abstract void Deserialize(string name, string content);
     }
 }

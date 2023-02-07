@@ -11,7 +11,7 @@ namespace FileReader
     public class FileProcessor
     {
 
-        public File DeserializeFile(string content, string type)
+        public File DeserializeFile(string content, string name, string type)
         {
             File? file = null;
 
@@ -32,7 +32,7 @@ namespace FileReader
                 default:
                     throw new InvalidOperationException("File does not exist");
             }
-            file.Deserialize(content);
+            file.Deserialize(name, content);
             return file;
         }
 

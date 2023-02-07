@@ -24,11 +24,10 @@ namespace FileReader.Files
             Type = ".json";
         }
 
-        public override void Deserialize(string content)
+        public override void Deserialize(string name, string content)
         {
-            JSONFile file = JsonConvert.DeserializeObject<JSONFile>(content) ?? throw new ArgumentNullException(nameof(content));
-            FileName = file.FileName;
-            Content = file.Content;
+            FileName = name;
+            Content = content;
         }
 
         public override string Serialize()
