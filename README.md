@@ -67,7 +67,7 @@ Download file option allows user to paste url address to download file from.Appl
 if file type is being supported user is allowed to enter file name and download it. If an error occurs, application displays information
 on what went wrong and instructs user on what to do.
 
-![This is an image](https://imagizer.imageshack.com/img923/8316/IdxkxG.jpg)
+![This is an image](https://imagizer.imageshack.com/img924/8486/yxO3ik.jpg)
 
 Open file option allows user to enter file name, that has been previously created or downloaded.
 
