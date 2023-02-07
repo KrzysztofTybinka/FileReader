@@ -36,6 +36,13 @@ namespace FileReader.Files
             return JsonConvert.SerializeObject(json, Formatting.Indented);
         }
 
+        public override File CreateFile(string name, Dictionary<string, string> data)
+        {
+            FileName = name;
+            Content =  JsonConvert.SerializeObject(data, Formatting.Indented);
+            return this;
+        }
+
         /// <summary>
         /// Separates json objects by given attribute
         /// and parses it to list of objects.

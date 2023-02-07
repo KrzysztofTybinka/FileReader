@@ -14,5 +14,6 @@ namespace FileReader.Files
 
         public abstract string Serialize();
         public abstract void Deserialize(string name, string content);
+        public abstract File CreateFile(string name, Dictionary<string, string> data);
     }
 }

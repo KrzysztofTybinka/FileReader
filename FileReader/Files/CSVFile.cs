@@ -31,6 +31,17 @@ namespace FileReader.Files
             return Content;
         }
 
+        public string CreateCsvFile(Dictionary<string, string> data)
+        {
+            StringBuilder csvFile = new StringBuilder();
+            string header = string.Join(",", data.Keys);
+            csvFile.AppendLine(header);
+            string values = string.Join(",", data.Values);
+            csvFile.AppendLine(values);
+
+            return csvFile.ToString();
+        }
+
         /// <summary>
         /// Deserializes CSV string representation
         /// and parses it to list of objects.
