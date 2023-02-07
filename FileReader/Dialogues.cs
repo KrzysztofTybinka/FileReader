@@ -34,7 +34,7 @@ namespace FileReader
         /// </summary>
         public static void Menu()
         {
-            Console.Write("Choose one option:\n0. Exit\n1. Download file\n2. Open file" +
+            Console.Write("----- Menu ------\nChoose one option:\n0. Exit\n1. Download file\n2. Open file" +
                 "\n3. Create file\n4. Show files\nEnter a number: ");
 
             while (true)
@@ -77,31 +77,39 @@ namespace FileReader
 
         private static void DownloadFile()
         {
-            Console.Write("\nYou chose to download a file.\nEnter url: ");
-            string url = Console.ReadLine() ?? throw new ArgumentNullException();
-            Console.Write("Enter file name: ");
-            string fileName = Console.ReadLine() ?? throw new ArgumentNullException();
-            var fr = new FileRepository();
-
-            while (fr.FileExists(fileName))
+            try
             {
-                Console.Write("File with this name already exists...\nGo back to menu (0), or enter new name: ");
-                fileName = Console.ReadLine() ?? throw new ArgumentNullException();
-                if (fileName == "0")
+                Console.Write("\nYou chose to download a file.\nEnter url: ");
+                string url = Console.ReadLine() ?? throw new ArgumentNullException();
+                Console.Write("Enter file name: ");
+                string fileName = Console.ReadLine() ?? throw new ArgumentNullException();
+                var fr = new FileRepository();
+
+                while (fr.FileExists(fileName))
                 {
+                    Console.Write("File with this name already exists...\nGo back to menu (0), or enter new name: ");
+                    fileName = Console.ReadLine() ?? throw new ArgumentNullException();
+                    if (fileName == "0")
+                    {
+                        Menu();
+                    }
+                }
+
+                FileManager f = new FileManager(new FileProcessor(), fr);
+
+                if (!f.DownloadFile(url, fileName).Result)
+                {
+                    Console.WriteLine("Failed to download a file.\n");
                     Menu();
                 }
-            }
-
-            FileManager f = new FileManager(new FileProcessor(), fr);
-
-            if (!f.DownloadFile(url, fileName).Result)
-            {
-                Console.WriteLine("Failed to download a file.\n");
+                Console.WriteLine("File downloaded successfully.\n");
                 Menu();
             }
-            Console.WriteLine("File downloaded successfully.\n");
-            Menu();
+            catch (Exception)
+            {
+                Console.WriteLine("Something went wrong...\n");
+                Menu();
+            }
         }
 
         private static void OpenFile()
@@ -116,7 +124,16 @@ namespace FileReader
 
         private static void ShowFiles()
         {
+            Console.WriteLine("\nFiles list:");
+            var fr = new FileRepository();
+            var files = fr.GetFilesList();
 
+            foreach (var fileName in files)
+            {
+                Console.WriteLine(fileName);
+            }
+            Console.WriteLine();
+            Menu();
         }
 
         private static void FileExists()

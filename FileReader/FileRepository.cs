@@ -56,7 +56,17 @@ namespace FileReader
             {
                 return false;
             }
-        }        
+        }    
+        
+        public List<string> GetFilesList()
+        {
+            using (var context = new FileContext())
+            {
+                return context.Files
+                    .Select(n => n.Name)
+                    .ToList();
+            }
+        }
 
         public bool FileExists(string name)
         {
