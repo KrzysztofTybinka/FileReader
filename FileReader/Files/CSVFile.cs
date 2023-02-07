@@ -28,7 +28,7 @@ namespace FileReader.Files
 
         public override string Serialize()
         {
-            throw new NotImplementedException();
+            return Content;
         }
 
         /// <summary>
