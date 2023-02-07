@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FileReader
 {
+    /// <summary>
+    /// Provides methods to download and analize files.
+    /// </summary>
     public class FileManager
     {
         private FileProcessor fileProcessor;
@@ -17,6 +20,14 @@ namespace FileReader
             this.fileRepository = fileRepository;
         }
 
+        /// <summary>
+        /// Donwloads asynchronously file from given url
+        /// address and saves it to a database.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="fileName"></param>
+        /// <returns>True if file was downloaded and saved 
+        /// successfully, otherwise false.</returns>
         public async Task<bool> DownloadFile(string url, string fileName)
         {
             string fileType = GetFileType(url);
@@ -41,8 +52,12 @@ namespace FileReader
             return false;
         }
 
-
-
+        /// <summary>
+        /// Downloads file asynchronously from given url.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>String representation of downloaded file.</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         private async Task<string> DownloadFileAsync(string url)
         {
             try
@@ -57,6 +72,12 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Gets file type based on given url.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns>String representation of file type.</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         private string GetFileType(string url)
         {
             try
