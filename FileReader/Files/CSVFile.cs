@@ -20,17 +20,32 @@ namespace FileReader.Files
             Type = ".csv";
         }
 
+        /// <summary>
+        /// Deserializes string to this object.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
         public override void Deserialize(string name, string content)
         {
             FileName = name;
             Content = content;
         }
 
+        /// <summary>
+        /// Serializes this object to a string.
+        /// </summary>
+        /// <returns>String representation of serialized object.</returns>
         public override string Serialize()
         {
             return Content;
         }
 
+        /// <summary>
+        /// Creates CSVFile from given dictionary.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="rootValue"></param>
+        /// <returns>File.</returns>
         public override File CreateFile(string name, Dictionary<string, List<string>> data)
         {
             FileName = name;
@@ -45,34 +60,6 @@ namespace FileReader.Files
             Content = sb.ToString();
             return this;
         }
-
-        /// <summary>
-        /// Deserializes CSV string representation
-        /// and parses it to list of objects.
-        /// </summary>
-        /// <param name="root"></param>
-        /// <returns>List of objects.</returns>
-        //public List<object> ObjectsToList(string root)
-        //{
-        //    try
-        //    {
-        //        List<object> list = new List<object>();
-
-        //        var values = file.Split('\n');
-
-        //        for (int i = 1; i < values.Length - 1; i++)
-        //        {
-        //            list.Add(values[i].Split(',').ToList());
-        //        }
-        //        return list;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new FileNotFoundException("Cannot get file.");
-        //    }
-        //}
-
-
 
         /// <summary>
         /// Returns representation of this XML file.

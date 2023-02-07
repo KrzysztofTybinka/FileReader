@@ -24,18 +24,33 @@ namespace FileReader.Files
             Type = ".json";
         }
 
+        /// <summary>
+        /// Deserializes string to this object.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="content"></param>
         public override void Deserialize(string name, string content)
         {
             FileName = name;
             Content = content;
         }
 
+        /// <summary>
+        /// Serializes this object to a string.
+        /// </summary>
+        /// <returns>String representation of serialized object.</returns>
         public override string Serialize()
         {
             dynamic json = JsonConvert.DeserializeObject(Content!)!;
             return JsonConvert.SerializeObject(json, Formatting.Indented);
         }
 
+        /// <summary>
+        /// Creates JSONFile from given dictionary.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="rootValue"></param>
+        /// <returns>File.</returns>
         public override File CreateFile(string name, Dictionary<string, List<string>> data)
         {
             FileName = name;

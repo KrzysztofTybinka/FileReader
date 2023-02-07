@@ -23,29 +23,6 @@ namespace FileReader.Files
         }
 
         /// <summary>
-        /// Creates xml file from given dictionary.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="rootValue"></param>
-        /// <returns>XDocument</returns>
-        public override File CreateFile(string name, Dictionary<string, List<string>> data)
-        {
-            FileName = name;
-            XDocument xmlFile = new XDocument();
-            XElement root = new XElement("Root");
-
-            foreach (var item in data)
-            {
-                XElement element = new XElement(item.Key, item.Value);
-                root.Add(element);
-            }
-
-            xmlFile.Add(root);
-            Content = xmlFile.ToString();
-            return this;
-        }
-
-        /// <summary>
         /// Deserializes string to this object.
         /// </summary>
         /// <param name="name"></param>
@@ -79,7 +56,28 @@ namespace FileReader.Files
             return stringBuilder.ToString();
         }
 
+        /// <summary>
+        /// Creates XMLFile from given dictionary.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="rootValue"></param>
+        /// <returns>File.</returns>
+        public override File CreateFile(string name, Dictionary<string, List<string>> data)
+        {
+            FileName = name;
+            XDocument xmlFile = new XDocument();
+            XElement root = new XElement("Root");
 
+            foreach (var item in data)
+            {
+                XElement element = new XElement(item.Key, item.Value);
+                root.Add(element);
+            }
+
+            xmlFile.Add(root);
+            Content = xmlFile.ToString();
+            return this;
+        }
 
         /// <summary>
         /// Returns representation of this XML file.
