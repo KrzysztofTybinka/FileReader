@@ -13,7 +13,8 @@ using File = FileReader.Files.File;
 namespace FileReader
 {
     /// <summary>
-    /// Provides methods containg user dialogues.
+    /// Provides methods that provide user dialogues,
+    /// collecting input data from users and managing it.
     /// </summary>
     public static class Dialogues
     {
@@ -78,6 +79,10 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Manages user dialog to download file, collects
+        /// input data, downloads file and handles errors.
+        /// </summary>
         private static void DownloadFile()
         {
             try
@@ -115,6 +120,10 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Manages user dialog to open a file, collects
+        /// input data, opens file and handles errors.
+        /// </summary>
         private static void OpenFile()
         {
             Console.Write("\nYou chose to open a file.\nEnter file name: ");
@@ -144,6 +153,10 @@ namespace FileReader
             Menu();
         }
 
+        /// <summary>
+        /// Manages user dialog to create a file, collects
+        /// input data, creates a file and handles errors.
+        /// </summary>
         private static void CreateFile()
         {
             Console.Write("\nYou chose to create a file.\nEnter file name: ");
@@ -234,6 +247,10 @@ namespace FileReader
             }
         }
 
+        /// <summary>
+        /// Manages user dialog to delete file, collects
+        /// input data, deletes file and handles errors.
+        /// </summary>
         private static void DeleteFile()
         {
             Console.Write("\nYou chose to delete a file.\nEnter file name: ");
