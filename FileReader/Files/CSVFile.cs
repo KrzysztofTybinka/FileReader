@@ -12,7 +12,7 @@ namespace FileReader.Files
     /// Initilizes a new instance of the CSVFile class.
     /// Represents a CSV file.
     /// </summary>
-    public class CSVFile : FileAbstract
+    public class CSVFile : File
     {
 
         public CSVFile()

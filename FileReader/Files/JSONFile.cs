@@ -16,12 +16,12 @@ namespace FileReader.Files
     /// Initilizes a new instance of the JSONFile class.
     /// Represents a JSON file.
     /// </summary>
-    public class JSONFile : FileAbstract
+    public class JSONFile : File
     {
 
         public JSONFile()
         {
-
+            Type = ".json";
         }
 
         public override void Deserialize(string content)

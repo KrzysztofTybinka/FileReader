@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using File = FileReader.Files.File;
 
 namespace FileReader
 {
     public class FileProcessor
     {
 
-        public FileAbstract DeserializeFile(string content, string type)
+        public File DeserializeFile(string content, string type)
         {
-            FileAbstract file = null;
+            File? file = null;
 
             switch (type)
             {
@@ -35,7 +36,7 @@ namespace FileReader
             return file;
         }
 
-        public string SerializeFile(FileAbstract file)
+        public string SerializeFile(File file)
         {
             return file.Serialize();
         }

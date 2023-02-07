@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileReader.Files
 {
-    public abstract class FileAbstract
+    public abstract class File
     {
         public string FileName { get; set; }
         public string Content { get; set; }

@@ -13,7 +13,7 @@ namespace FileReader.Files
     /// Initilizes a new instance of the XMLFile class.
     /// Represents a XML file.
     /// </summary>
-    public class XMLFile : FileAbstract
+    public class XMLFile : File
     {
 
         public XMLFile()

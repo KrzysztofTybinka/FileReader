@@ -4,30 +4,59 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using File = FileReader.Files.File;
 
 namespace FileReader
 {
     public class FileRepository
     {
-        public void SaveFile(FileAbstract file)
+        public bool SaveFile(File file)
         {
-            using (var context = new FileContext())
+            try
             {
-                var f = new FileModel(file.FileName, file.Content, file.Type);
+                using (var context = new FileContext())
+                {
+                    var f = new FileModel(file.FileName, file.Content, file.Type);
 
-                context.Files.Add(f);
-                context.SaveChanges();
+                    context.Files.Add(f);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        //public FileAbstract GetFile(string fileName)
-        //{
-        //    using (var context = new FileContext())
-        //    {
-        //        var file = context.Files.Select(x => x.Name == fileName);
-        //        FileAbstract f = new FileAbstract();
-        //    }
-        //}
+        public File GetFile(string fileName)
+        {
+            using (var context = new FileContext())
+            {
+                var file = context.Files.SingleOrDefault(x => x.Name == fileName);
+                FileProcessor processor = new FileProcessor();
+                File f = processor.DeserializeFile(file.Content, file.Type);
+                return f;
+            }
+        }
+
+        public bool DeleteFile(string fileName)
+        {
+            try
+            {
+                using (var context = new FileContext())
+                {
+                    var objectToDelete = context.Files.SingleOrDefault(x => x.Name == fileName);
+                    context.Files.Remove(objectToDelete);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }        
 
         public bool FileExists(string name)
         {
