@@ -37,7 +37,7 @@ namespace FileReader
         public static void Menu()
         {
             Console.Write("----- Menu ------\nChoose one option:\n0. Exit\n1. Download file\n2. Open file" +
-                "\n3. Create file\n4. Show files\nEnter a number: ");
+                "\n3. Create file\n4. Show files\n5. Delete file\nEnter a number: ");
 
             while (true)
             {
@@ -64,6 +64,7 @@ namespace FileReader
                         break;
 
                     case "5":
+                        DeleteFile();
                         break;
 
                     case "6":
@@ -140,6 +141,7 @@ namespace FileReader
             Console.WriteLine($"File name: {fileName}");
             Console.WriteLine(file.Serialize());
             Console.WriteLine();
+            Menu();
         }
 
         private static void CreateFile()
@@ -167,6 +169,33 @@ namespace FileReader
                 Console.WriteLine("Something went wrong...\n");
                 Menu();
             }
+        }
+
+        private static void DeleteFile()
+        {
+            Console.Write("\nYou chose to delete a file.\nEnter file name: ");
+            string? fileName = Console.ReadLine();
+            var fr = new FileRepository();
+
+            while (fileName == null)
+            {
+                Console.Write("File name can't be empty, go back to menu (0) or enter file name: ");
+                fileName = Console.ReadLine();
+
+                if (fileName == "0")
+                {
+                    Menu();
+                }
+            }
+
+            if (!fr.FileExists(fileName))
+            {
+                Console.WriteLine("File doesn't exist.\n");
+                Menu();
+            }
+            fr.DeleteFile(fileName);
+            Console.WriteLine("File deleted successfully.\n");
+            Menu();
         }
     }
 }
