@@ -31,25 +31,25 @@ namespace FileReader.Files
         /// </summary>
         /// <param name="root"></param>
         /// <returns>List of objects.</returns>
-        public List<object> ObjectsToList(string root)
-        {
-            try
-            {
-                List<object> list = new List<object>();
+        //public List<object> ObjectsToList(string root)
+        //{
+        //    try
+        //    {
+        //        List<object> list = new List<object>();
 
-                var values = file.Split('\n');
+        //        var values = file.Split('\n');
 
-                for (int i = 1; i < values.Length - 1; i++)
-                {
-                    list.Add(values[i].Split(',').ToList());
-                }
-                return list;
-            }
-            catch (Exception)
-            {
-                throw new FileNotFoundException("Cannot get file.");
-            }
-        }
+        //        for (int i = 1; i < values.Length - 1; i++)
+        //        {
+        //            list.Add(values[i].Split(',').ToList());
+        //        }
+        //        return list;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw new FileNotFoundException("Cannot get file.");
+        //    }
+        //}
 
         public override string Serialize()
         {
@@ -63,7 +63,7 @@ namespace FileReader.Files
         /// <returns>The representation of this XML file.</returns>
         public override string ToString()
         {
-            return file.ToString();
+            return Content;
         }
     }
 }

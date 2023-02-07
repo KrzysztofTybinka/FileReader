@@ -85,32 +85,9 @@ namespace FileReader
                 string type = GetFileType(url);
                 string content;
 
-                if(type == ".zip")
-                {
-                    Unzipper unzip = new Unzipper(url);
-                    content = unzip.UnzipTypeOut(out type);
-                }
-                else
-                {
-                    content = DownloadFileAsync(url).Result;
-                }
 
-                do
-                {
-                    Console.Write("Enter file name: ");
-                    name = Console.ReadLine() ?? throw new ArgumentNullException();
-                } while (FileExists(name + type));
 
-                IFile file = GetFile(type, content);
-
-                using (var context = new FileContext())
-                {
-                    var f = new File(name + type, file.ToString()!);
-
-                    context.Files.Add(f);
-                    context.SaveChanges();
-                }
-                Console.WriteLine("File saved successfully.\n");
+ 
                 Menu();
             }
             catch (Exception)
@@ -173,36 +150,8 @@ namespace FileReader
             }
         }
 
-        private static IFile GetFile(string type, string content)
-        {
-            switch (type)
-            {
-                case ".json":
-                    return new JSONFile(content);
 
-                case ".xml":
-                    return new XMLFile(content);
 
-                case ".csv":
-                    return new CSVFile(content);
 
-                default:
-                    throw new InvalidOperationException("File does not exist");
-            }
-        }
-
-        private static async Task<string> DownloadFileAsync(string url)
-        {
-            try
-            {
-                HttpClient client = new HttpClient();
-                string content = await client.GetStringAsync(url);
-                return content;
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException("Invalid operation.");
-            }
-        }
     }
 }

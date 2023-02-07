@@ -53,20 +53,20 @@ namespace FileReader.Files
         /// </summary>
         /// <param name="root"></param>
         /// <returns>List of XML elements.</returns>
-        public List<object> ObjectsToList(string root)
-        {
-            List<object> list = new List<object>();
-            XElement? rootElement = file.Element(root);
+        //public List<object> ObjectsToList(string root)
+        //{
+        //    List<object> list = new List<object>();
+        //    XElement? rootElement = file.Element(root);
 
-            if (rootElement != null)
-            {
-                foreach (var element in rootElement.Elements())
-                {
-                    list.Add(element);
-                }
-            }
-            return list;
-        }
+        //    if (rootElement != null)
+        //    {
+        //        foreach (var element in rootElement.Elements())
+        //        {
+        //            list.Add(element);
+        //        }
+        //    }
+        //    return list;
+        //}
 
         public override string Serialize()
         {
@@ -80,7 +80,7 @@ namespace FileReader.Files
         /// <returns>The representation of this XML file.</returns>
         public override string ToString()
         {
-            return file.ToString();
+            return Content;
         }
     }
 }

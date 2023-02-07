@@ -10,7 +10,7 @@ namespace FileReader
     public class FileProcessor
     {
 
-        private FileAbstract GetFile(string type, string content)
+        public FileAbstract DeserializeFile(string content, string type)
         {
             FileAbstract file = null;
 
@@ -35,17 +35,11 @@ namespace FileReader
             return file;
         }
 
-        private string GetFileType(string url)
+        public string SerializeFile(FileAbstract file)
         {
-            try
-            {
-                FileInfo fi = new FileInfo(url);
-                return fi.Extension;
-            }
-            catch (Exception)
-            {
-                throw new InvalidOperationException("Invalid command.");
-            }
+            return file.Serialize();
         }
+
+
     }
 }

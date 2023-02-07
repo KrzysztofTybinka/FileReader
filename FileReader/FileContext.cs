@@ -12,7 +12,7 @@ namespace FileReader
     /// </summary>
     public class FileContext : DbContext
     {
-        public DbSet<File> Files { get; set; }
+        public DbSet<FileModel> Files { get; set; }
 
         /// <summary>
         /// Provides connection string, builds database.

@@ -42,20 +42,20 @@ namespace FileReader.Files
         /// </summary>
         /// <param name="root"></param>
         /// <returns>List of JSON elements.</returns>
-        public List<object> ObjectsToList(string root)
-        {
-            List<object> list = new List<object>();
-            JToken? rootElement = file[root];
+        //public List<object> ObjectsToList(string root)
+        //{
+        //    List<object> list = new List<object>();
+        //    JToken? rootElement = file[root];
 
-            if (rootElement != null)
-            {
-                foreach (var item in rootElement)
-                {
-                    list.Add(item);
-                }
-            }
-            return list;
-        }
+        //    if (rootElement != null)
+        //    {
+        //        foreach (var item in rootElement)
+        //        {
+        //            list.Add(item);
+        //        }
+        //    }
+        //    return list;
+        //}
 
 
 
