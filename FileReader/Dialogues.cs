@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Reflection.Metadata.Ecma335;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using File = FileReader.Files.File;
 
 namespace FileReader
 {
@@ -114,7 +116,30 @@ namespace FileReader
 
         private static void OpenFile()
         {
+            Console.Write("\nYou chose to open a file.\nEnter file name: ");
+            string? fileName = Console.ReadLine();
+            var fr = new FileRepository();
 
+            while (fileName == null)
+            {
+                Console.Write("File name can't be empty, go back to menu (0) or enter file name: ");
+                fileName = Console.ReadLine();
+
+                if (fileName == "0")
+                {
+                    Menu();
+                }
+            }
+
+            if (!fr.FileExists(fileName))
+            {
+                Console.WriteLine("File doesn't exist.\n");
+                Menu();
+            }
+            File file = fr.GetFile(fileName);
+            Console.WriteLine($"File name: {fileName}");
+            Console.WriteLine(file.Serialize());
+            Console.WriteLine();
         }
 
         private static void CreateFile()
@@ -124,21 +149,24 @@ namespace FileReader
 
         private static void ShowFiles()
         {
-            Console.WriteLine("\nFiles list:");
-            var fr = new FileRepository();
-            var files = fr.GetFilesList();
-
-            foreach (var fileName in files)
+            try
             {
-                Console.WriteLine(fileName);
+                Console.WriteLine("\nFiles list:");
+                var fr = new FileRepository();
+                var files = fr.GetFilesList();
+
+                foreach (var fileName in files)
+                {
+                    Console.WriteLine(fileName);
+                }
+                Console.WriteLine();
+                Menu();
             }
-            Console.WriteLine();
-            Menu();
-        }
-
-        private static void FileExists()
-        {
-
+            catch (Exception)
+            {
+                Console.WriteLine("Something went wrong...\n");
+                Menu();
+            }
         }
     }
 }

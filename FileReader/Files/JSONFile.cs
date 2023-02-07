@@ -32,7 +32,8 @@ namespace FileReader.Files
 
         public override string Serialize()
         {
-            return JsonConvert.SerializeObject(this);
+            dynamic json = JsonConvert.DeserializeObject(Content!)!;
+            return JsonConvert.SerializeObject(json, Formatting.Indented);
         }
 
         /// <summary>

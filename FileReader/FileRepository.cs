@@ -16,7 +16,7 @@ namespace FileReader
             {
                 using (var context = new FileContext())
                 {
-                    var f = new FileModel(file.FileName, file.Content, file.Type);
+                    var f = new FileModel(file.FileName, file.Type, file.Content);
 
                     context.Files.Add(f);
                     context.SaveChanges();
@@ -35,7 +35,7 @@ namespace FileReader
             {
                 var file = context.Files.SingleOrDefault(x => x.Name == fileName);
                 FileProcessor processor = new FileProcessor();
-                File f = processor.DeserializeFile(file.Content, file.Name, file.Type);
+                File f = processor.DeserializeFile(file!.Content, file.Name, file.Type);
                 return f;
             }
         }
@@ -47,7 +47,7 @@ namespace FileReader
                 using (var context = new FileContext())
                 {
                     var objectToDelete = context.Files.SingleOrDefault(x => x.Name == fileName);
-                    context.Files.Remove(objectToDelete);
+                    context.Files.Remove(objectToDelete!);
                     context.SaveChanges();
                     return true;
                 }
@@ -75,7 +75,6 @@ namespace FileReader
                 bool exists = context.Files.Any(f => f.Name == name);
                 if (exists)
                 {
-                    Console.WriteLine("File with this name already exists.");
                     return true;
                 }
             }
