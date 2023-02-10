@@ -76,5 +76,9 @@ Open file option allows user to enter file name, that has been previously create
 Create file opens up an interface where user chooses file name and format, then user is being asked to input keys and corresponding values to console,
 based on that file is being creted and saved to the database. Show files option displays list of all files names. Delete file asks user for file name to delete
 and if that file exists, deletes it.
+# Contributing
+If you wish to contribute to this project, please feel free to create a pull request with your changes.
+# License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 
